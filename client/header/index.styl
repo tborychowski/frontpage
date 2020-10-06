@@ -1,0 +1,49 @@
+@import "lib"
+
+.header
+	margin 0 3em
+	padding 0
+	user-select none
+	touch-action none
+
+	h1
+		font-size 78px
+		text-transform uppercase
+		letter-spacing .4em
+		font-weight bold
+		text-align center
+		margin 0
+
+
+.categories
+	margin 0 40
+	padding 0
+	list-style none
+	display flex
+	flex-flow row
+	align-items center
+	justify-content space-between
+	user-select none
+	touch-action none
+
+	.category
+		display block
+		flex 1
+		padding 5 20
+		text-align center
+		min-width 120
+		font-size 14px
+		text-transform uppercase
+		u 0
+
+		&.active
+			font-weight 700
+
+
+.header-hr
+	margin-top 0
+	margin-bottom 0
+
+.categories-hr
+	margin-top 0
+	margin-bottom 20

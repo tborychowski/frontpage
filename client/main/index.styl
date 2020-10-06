@@ -1,0 +1,150 @@
+@import "lib"
+
+
+main
+	padding 0 3em 1em
+	column-rule 1px solid var(--border-color)
+	column-gap 30px
+
+	hr
+		margin 20 0
+		break-before avoid
+
+	.no-more-news
+		height calc(100vh - 210px)
+		display flex
+		justify-content center
+		align-items center
+		font-size 38px
+		font-style italic
+		font-weight 100
+		opacity .5
+
+article
+	display inline
+	margin 0
+	padding 0
+	text-align justify
+	border-radius 4
+	transition opacity .4s ease-out
+	break-after avoid
+
+	&.read
+		opacity .5
+
+	h2
+		margin 0
+		padding 0
+		font-size 20px
+		font-weight 400
+		text-align left
+		break-inside avoid
+
+	h3
+		padding 0
+		margin 0
+		font-size 12px
+		text-align left
+
+		&.links
+			margin 5 0 10
+
+	p
+		margin 0 0 10
+		font-size 14px
+
+	blockquote
+		font-style italic
+		margin 0 0 1em 0
+		padding 10 20
+		text-align left
+		border 1px dashed var(--border-color)
+
+	ul
+	ol
+		padding 0
+		margin 0
+		list-style none
+
+		li
+			margin 0 0 10
+
+	pre
+		display block
+		overflow auto
+		background #0002
+		padding calc(1em - 2px) 5px
+		border 2px dotted var(--border-color)
+		margin 0 0 1em 0
+
+		code
+			margin 0
+			padding 0
+
+	figure
+		margin 0
+		padding 0
+	img
+		filter grayscale(1)
+		border 2px dotted var(--border-color)
+		padding 2
+		max-width 100%
+
+	a img
+		display none
+
+	.read-more
+		break-before avoid
+
+
+main article.headline .article-content
+main article .article-content
+	word-break break-all
+	hyphens auto
+	h2
+		font-size 16px
+	h3
+		font-size 14px
+
+
+main.layout_empty
+main.layout_one
+	column-count 1
+
+main.layout_two
+main.layout_three
+	column-count 2
+
+main.layout_four
+	column-count 3
+
+main.layout_full
+	column-count 4
+
+
+main.layout_two
+main.layout_three
+main.layout_four
+	h2
+		font-size 32px
+
+main.layout_empty
+main.layout_one
+main.layout_four
+main.layout_full
+	.headline
+		column-span all
+		display block
+
+		h2
+			font-size 38px
+
+		img
+			float right
+			margin 0 0 20 40
+			width 20em
+
+		.article-content
+			display block
+			max-height 24em
+			overflow hidden

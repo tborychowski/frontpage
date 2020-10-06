@@ -1,0 +1,111 @@
+
+
+
+//*** SHORTCUTS ************************************************************************************
+b(n) { if n is 0 { font-weight: normal } else { font-weight: bold } }				// b:1 -> font-weight: bold;
+i(n) { if n is 0 { font-style: normal } else { font-style: italic } }				// i:1 -> font-style: italic;
+u(n) { if n is 0 { text-decoration: none } else { text-decoration: underline } }	// u:1 -> text-decoration: underline;
+
+padding() { padding: joinArgs(arguments) }
+padding-left(a) { padding-left: px(a) }
+padding-right(a) { padding-right: px(a) }
+padding-top(a) { padding-top: px(a) }
+padding-bottom(a) { padding-bottom: px(a) }
+
+margin() { margin: joinArgs(arguments) }
+margin-left(a) { margin-left: px(a) }
+margin-right(a) { margin-right: px(a) }
+margin-top(a) { margin-top: px(a) }
+margin-bottom(a) { margin-bottom: px(a) }
+
+size(w, h=w) { width: px(w); height: px(h); }
+min-size(w, h=w) { min-width: px(w); min-height: px(h); }
+max-size(w, h=w) { max-width: px(w); max-height: px(h); }
+
+width(n = 0) { width: px(n) }
+min-width(n = 0) { min-width: px(n) }
+max-width(n = 0) { max-width: px(n) }
+
+height(n = 0) { height: px(n) }
+min-height(n = 0) { min-height: px(n) }
+max-height(n = 0) { max-height: px(n) }
+
+top(n = 0) { top: px(n) }
+right(n = 0) { right: px(n) }
+left(n = 0) { left: px(n) }
+bottom(n = 0) { bottom: px(n) }
+
+z(n = 0) { z-index: n }
+//*** SHORTCUTS ************************************************************************************
+
+
+border-radius() { border-radius: joinArgs(arguments); }
+
+
+// set background, e.g. bg: red; bg: img x y; bg: red img;
+bg()
+	arg = arguments
+	if type(arg[0]) == 'rgba'
+		if length(arg) > 1
+			background: arg[0] setBg(arg[1], arg[2] || 0, arg[3] || 0, arg[4] || no-repeat)
+		else
+			background: arg[0]
+	else
+		if arguments[0] == 'none'
+			background: none
+		else
+			background: setBg(arg[0], arg[1] || 0, arg[2] || 0, arg[3] || no-repeat)
+
+
+
+//*** STYLE HELPERS ********************************************************************************
+
+// border: [1px] [solid] [blue], e.g. border: 1; border: red; border: 1 red; border: 1 dotted red;
+setBorder()
+	arg = arguments
+	if arg[0] == 'none'
+		return none
+	else if type(arg[0]) == 'unit'
+		size = arg[0]
+		if type(arg[1]) == 'rgba'
+			color = arg[1]
+			style = solid
+		else
+			if type(arg[1]) == 'ident'
+				style = arg[1]
+				if type(arg[2]) == 'rgba' { color = arg[2] } else { color = transparent }
+			else
+				style = solid
+				if arg[1] == null
+					color = transparent
+	else
+		size = 1
+		style = solid
+		if type(arg[0]) == 'rgba' { color = arg[0] }
+
+	return px(size) style color;
+
+
+setBg()
+	arg = arguments
+	return unquote('url(' + img-base + '/' + unquote(arg[0]) + ') ' + px(arg[1]) + ' ' + px(arg[2]) + ' ' + arg[3]);
+//*** STYLE HELPERS ********************************************************************************
+
+
+
+
+
+//*** GENERIC HELPERS ******************************************************************************
+px(a)
+	if type(a) == 'unit'
+		if unit(a) == 'px' || a == 0 { return a } else { return (a + 0px) }
+	else
+		return a
+
+// Joins arguments with space and adds "px" to values if needed
+joinArgs(args)
+	buf = ''
+	for arg, i in args
+		if i { buf += ' ' + px(arg)	} else { buf += px(arg) }
+	return unquote(buf)
+//*** GENERIC HELPERS ******************************************************************************
